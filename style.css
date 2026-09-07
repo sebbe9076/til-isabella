@@ -1,0 +1,393 @@
+/* =========================================================
+   Bursdagsgave til Isabella – stil
+   Farger og tekst er lette å endre her og i script.js
+   ========================================================= */
+:root {
+  --bg: #fdfbf4;
+  --ink: #4a3a34;
+  --pink: #f4b0b0;
+  --pink-soft: #f8cccc;
+  --pink-ink: #7c4a4a;
+  --btn-bg: #ffffff;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Patrick Hand", "Comic Sans MS", "Segoe Print", cursive, sans-serif;
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ---------- stjerne-bakgrunn ---------- */
+.stars {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.stars svg {
+  position: absolute;
+  opacity: 0.85;
+  animation: twinkle 4s ease-in-out infinite;
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0.9; transform: scale(1); }
+  50%      { opacity: 0.5; transform: scale(0.88); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .stars svg { animation: none; }
+}
+
+/* ---------- scene / skjermer ---------- */
+.stage {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: 24px 18px 48px;
+}
+
+.screen {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  text-align: center;
+  max-width: 640px;
+  width: 100%;
+  animation: fadein 0.5s ease both;
+}
+.screen.is-active { display: flex; }
+
+@keyframes fadein {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- tekst ---------- */
+.line {
+  font-size: clamp(1.5rem, 4.6vw, 2.2rem);
+  line-height: 1.4;
+  margin: 0;
+  min-height: 1.4em;
+  max-width: 22ch;
+}
+.line::after {
+  content: "|";
+  margin-left: 1px;
+  opacity: 0;
+  animation: caret 0.8s step-end infinite;
+}
+.line.done::after { display: none; }
+@keyframes caret { 50% { opacity: 1; } }
+
+.subtle {
+  font-size: 1.05rem;
+  color: #9a9a9a;
+  margin: 0;
+}
+
+.mini-label {
+  font-size: 0.95rem;
+  color: #b5a79d;
+  letter-spacing: 0.6px;
+  margin: 0 0 -12px;
+  transform: rotate(-1.5deg);
+}
+
+.teacup {
+  width: clamp(190px, 58vw, 268px);
+  height: auto;
+  animation: bob 3.4s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) { .teacup { animation: none; } }
+
+/* ---------- tegninger ---------- */
+.art { display: grid; place-items: center; }
+.snoopy {
+  width: clamp(150px, 40vw, 210px);
+  height: auto;
+  animation: bob 3s ease-in-out infinite;
+}
+@keyframes bob {
+  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  50%      { transform: translateY(-8px) rotate(1deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .snoopy { animation: none; }
+}
+
+/* ---------- knapper ---------- */
+.btn {
+  font-family: inherit;
+  font-size: 1.25rem;
+  padding: 6px 20px;
+  background: var(--btn-bg);
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  border-radius: 14px 12px 15px 11px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+.btn:hover { background: #fff4f4; transform: translateY(-2px) rotate(-1deg); }
+.btn:active { transform: translateY(0); }
+
+.choices {
+  display: flex;
+  gap: 26px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.btn-shy { position: relative; transition: none; }
+
+/* ---------- rosa kort (skjerm 3 og 4) ---------- */
+.card {
+  position: relative;
+  margin-top: 46px;
+}
+.card-inner {
+  background: var(--pink);
+  border: 2.5px solid var(--ink);
+  border-radius: 26px;
+  padding: 42px 30px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  max-width: 420px;
+}
+.card .line { color: #5c3a3a; font-size: clamp(1.35rem, 4vw, 1.8rem); }
+.peek {
+  position: absolute;
+  top: -52px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: auto;
+  z-index: 2;
+}
+
+.cake-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+}
+.cake {
+  width: 118px;
+  height: auto;
+  transition: transform 0.2s ease;
+  animation: bob 3s ease-in-out infinite;
+}
+.cake-btn:hover .cake { transform: scale(1.08) rotate(-3deg); }
+.cake-btn:active .cake { transform: scale(0.94); }
+
+.box {
+  width: clamp(140px, 40vw, 190px);
+  height: auto;
+  animation: bob 3.4s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) { .box { animation: none; } }
+
+/* ---------- brev (skjerm 5) ---------- */
+.letter {
+  position: relative;
+  background: var(--pink);
+  border: 2.5px solid var(--ink);
+  border-radius: 40px 44px 40px 44px / 46px 40px 46px 40px;
+  padding: 58px 44px 52px;
+  max-width: 520px;
+  margin: 58px 10px 12px;
+}
+.letter-text {
+  font-family: "Caveat", "Patrick Hand", cursive;
+  font-weight: 600;
+  font-size: clamp(1.6rem, 5vw, 2.15rem);
+  line-height: 1.45;
+  color: var(--pink-ink);
+  max-width: 20ch;
+  margin: 0 auto;
+}
+
+.photo {
+  position: absolute;
+  width: 104px;
+  height: 104px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid var(--pink-soft);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+.photo-tl { top: -40px; left: -34px; transform: rotate(-4deg); }
+.photo-br { bottom: -40px; right: -30px; transform: rotate(4deg); }
+
+.deco { position: absolute; height: auto; }
+.deco-bl { width: 116px; bottom: -42px; left: -34px; transform: rotate(-4deg); }
+.deco-tr { width: 62px; top: -34px; right: -18px; transform: rotate(10deg); }
+
+/* konfetti-biter */
+.confetti {
+  position: fixed;
+  top: -12px;
+  width: 10px;
+  height: 14px;
+  z-index: 5;
+  pointer-events: none;
+  border-radius: 2px;
+}
+
+/* ==================================================================
+   PÅSKEEGG
+   ================================================================== */
+
+/* #2 – snakkeboble når man trykker på Snoopy */
+.snoopy { cursor: pointer; }
+.speech {
+  position: absolute;
+  left: 50%;
+  top: -6px;
+  transform: translateX(-50%);
+  background: #fff;
+  border: 2.5px solid var(--ink);
+  border-radius: 14px 14px 14px 4px;
+  padding: 5px 12px;
+  font-size: 1.15rem;
+  white-space: nowrap;
+  z-index: 4;
+  animation: pop-in 0.25s ease both;
+}
+.speech::after {
+  content: "";
+  position: absolute;
+  left: 16px;
+  bottom: -9px;
+  border: 7px solid transparent;
+  border-top-color: var(--ink);
+}
+.art { position: relative; }
+@keyframes pop-in {
+  from { opacity: 0; transform: translateX(-50%) scale(0.7); }
+  to   { opacity: 1; transform: translateX(-50%) scale(1); }
+}
+@keyframes fade-in-soft {
+  from { opacity: 0; transform: scale(0.94); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* #4 – hjertet i brevet banker + hjerter flyter opp */
+.heart-btn { cursor: pointer; display: inline-block; }
+.heart-btn.beat { animation: beat 0.5s ease; }
+@keyframes beat {
+  0%, 100% { transform: scale(1); }
+  30%      { transform: scale(1.4); }
+  60%      { transform: scale(0.9); }
+}
+.float-heart {
+  position: fixed;
+  z-index: 6;
+  font-size: 22px;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* #5 – stjerner som sprekker */
+@keyframes star-pop {
+  0%   { transform: scale(1) rotate(0); opacity: 1; }
+  50%  { transform: scale(1.8) rotate(40deg); opacity: 1; }
+  100% { transform: scale(0) rotate(120deg); opacity: 0; }
+}
+
+/* #7 – «en grunn til» */
+.finale-btns {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.reason-text {
+  font-family: "Caveat", "Patrick Hand", cursive;
+  font-weight: 600;
+  font-size: clamp(1.3rem, 4.4vw, 1.7rem);
+  color: var(--pink-ink);
+  margin: 4px 0 0;
+  min-height: 1.5em;
+  max-width: 22ch;
+  text-align: center;
+  animation: fade-in-soft 0.25s ease both;
+}
+
+/* #8 – bilde-forstørrelse */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  background: rgba(40, 32, 30, 0.82);
+  padding: 24px;
+  animation: fade-in-soft 0.2s ease both;
+}
+.lightbox figure { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.lightbox img {
+  max-width: min(90vw, 420px);
+  max-height: 70vh;
+  object-fit: contain;
+  border-radius: 18px;
+  border: 4px solid var(--pink-soft);
+}
+.lightbox figcaption {
+  font-family: "Caveat", "Patrick Hand", cursive;
+  font-weight: 600;
+  font-size: 1.6rem;
+  color: #fff;
+}
+.lightbox-close {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  background: transparent;
+  color: #fff;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+.photo { cursor: pointer; }
+
+/* #10 – te-koppen */
+.teacup { cursor: pointer; }
+#teaSurface, #teaLevel { transition: all 0.35s ease; }
+
+@media (prefers-reduced-motion: reduce) {
+  .speech, .lightbox, .reason-text { animation: none; }
+}
+
+/* ---------- litt luft på små skjermer ---------- */
+@media (max-width: 480px) {
+  .photo { width: 84px; height: 84px; }
+  .photo-tl { left: -20px; }
+  .photo-br { right: -16px; }
+  .deco-bl { width: 100px; left: -22px; }
+  .deco-tr { width: 54px; right: -12px; }
+  .letter { padding: 52px 24px 46px; }
+}

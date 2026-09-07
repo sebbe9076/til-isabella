@@ -1,0 +1,11 @@
+# originalbilder (backup – ikke nødvendig på nett)
+Bilder/
+
+# system
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# verktøy
+.claude/
+scratchpad/

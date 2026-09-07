@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#fdfbf4" />
+  <title>Til Isabella 🤍</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css?v=1" />
+</head>
+<body>
+  <!-- stjerne-bakgrunn (fylles av script.js) -->
+  <div class="stars" id="stars" aria-hidden="true"></div>
+
+  <main class="stage" id="stage">
+
+    <!-- SKJERM 1 -->
+    <section class="screen is-active" data-screen="1">
+      <p class="mini-label">snoopy lookalike</p>
+      <div class="art">
+        <svg viewBox="0 0 235 250" class="snoopy" aria-label="Snoopy-lignende figur med party-hatt og kake"><use href="#snoopy-party" /></svg>
+      </div>
+      <p class="line" data-text="…"></p>
+      <button class="btn" data-next>neste :3</button>
+    </section>
+
+    <!-- SKJERM 2 -->
+    <section class="screen" data-screen="2">
+      <div class="art">
+        <svg viewBox="0 0 235 250" class="snoopy" aria-label="Snoopy med party-hatt og kake"><use href="#snoopy-party" /></svg>
+      </div>
+      <p class="line" data-text="…"></p>
+      <div class="choices">
+        <button class="btn" data-next>ja!!</button>
+        <button class="btn btn-shy" id="shyBtn" type="button">nei takk.</button>
+      </div>
+    </section>
+
+    <!-- SKJERM 3 -->
+    <section class="screen" data-screen="3">
+      <div class="card">
+        <svg viewBox="0 0 260 160" class="peek" aria-hidden="true"><use href="#snoopy-peek" /></svg>
+        <div class="card-inner">
+          <p class="line" data-text="…"></p>
+          <button class="cake-btn" id="cakeBtn" type="button" aria-label="Åpne gaven">
+            <svg viewBox="0 -50 120 172" class="cake"><use href="#cake" /></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKJERM 4 -->
+    <section class="screen" data-screen="4">
+      <div class="card">
+        <svg viewBox="0 0 260 160" class="peek" aria-hidden="true"><use href="#snoopy-peek" /></svg>
+        <div class="card-inner">
+          <p class="line" data-text="…"></p>
+          <svg viewBox="0 0 220 200" class="box" aria-label="En pappeske"><use href="#gift-box" /></svg>
+          <p class="subtle" id="s4subtle"></p>
+          <button class="btn" data-next>siste hilsen 💌</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKJERM 5 -->
+    <section class="screen" data-screen="5">
+      <div class="letter">
+        <img class="photo photo-tl" src="img/oss-1.jpg" alt="oss to" data-caption="oss to 🤍" />
+        <img class="photo photo-br" src="img/isabella.jpg" alt="Isabella" data-caption="deg" />
+        <svg viewBox="0 0 90 96" class="deco deco-tr" aria-hidden="true"><use href="#deco-heart" /></svg>
+        <svg viewBox="0 0 235 250" class="deco deco-bl" aria-hidden="true"><use href="#snoopy-party" /></svg>
+        <p class="letter-text line" data-text="…"></p>
+      </div>
+      <p class="reason-text" id="reasonText" hidden></p>
+      <div class="finale-btns" hidden>
+        <button class="btn" id="reasonBtn" type="button">en grunn til 🤍</button>
+        <button class="btn" id="replayBtn" type="button">se på nytt ↺</button>
+      </div>
+      <p class="subtle" id="confettiHint" hidden>trykk hvor som helst for konfetti ✨</p>
+    </section>
+
+    <!-- PÅSKEEGG: te-skjerm (vises hvis man klarer å trykke «nei takk») -->
+    <section class="screen" id="teaScreen">
+      <p class="line" data-text="…"></p>
+      <svg viewBox="0 0 220 200" class="teacup" id="teacupSvg" role="button" tabindex="0" aria-label="En kopp med «seriøs te» – trykk for å drikke">
+        <g stroke="#4a3a34" stroke-width="4.5" stroke-linejoin="round" stroke-linecap="round">
+          <ellipse cx="110" cy="178" rx="76" ry="9" fill="#000" opacity="0.06" stroke="none"/>
+          <!-- skål -->
+          <path d="M38 154 C 38 145 70 140 110 140 C 150 140 182 145 182 154 C 182 163 150 168 110 168 C 70 168 38 163 38 154 Z" fill="#fff"/>
+          <!-- damp -->
+          <g id="teaSteam">
+            <path d="M88 42 C 80 34 96 26 88 14" fill="none" stroke-width="3.6" opacity="0.5"/>
+            <path d="M112 42 C 104 34 120 26 112 12" fill="none" stroke-width="3.6" opacity="0.5"/>
+            <path d="M136 42 C 128 34 144 26 136 14" fill="none" stroke-width="3.6" opacity="0.5"/>
+          </g>
+          <!-- hank -->
+          <path d="M160 66 C 192 62 194 114 156 118" fill="none"/>
+          <!-- kopp -->
+          <path d="M52 56 C 52 52 56 50 62 50 L 158 50 C 164 50 168 52 168 56 L 158 120 C 156 134 143 144 126 144 L 94 144 C 77 144 64 134 62 120 Z" fill="#fff"/>
+          <!-- te (klippes av koppen) -->
+          <clipPath id="teaCupClip"><path d="M52 56 L 168 56 L 158 120 C 156 134 143 144 126 144 L 94 144 C 77 144 64 134 62 120 Z"/></clipPath>
+          <g clip-path="url(#teaCupClip)">
+            <rect id="teaLevel" x="52" y="52" width="116" height="96" fill="#db9a63" stroke="none"/>
+          </g>
+          <ellipse id="teaSurface" cx="110" cy="57" rx="52" ry="9" fill="#e6ad78" stroke="none"/>
+          <path d="M58 57 C 58 52 81 48 110 48 C 139 48 162 52 162 57" fill="none"/>
+          <!-- tekst -->
+          <text x="110" y="104" text-anchor="middle" font-size="22" fill="#4a3a34" stroke="none" style="font-family:'Patrick Hand',cursive">seriøs te</text>
+        </g>
+      </svg>
+      <button class="btn" data-tea-continue type="button">fiiine, vis meg da 🙄</button>
+    </section>
+
+  </main>
+
+  <!-- bilde-forstørrelse (skjerm 5) -->
+  <div class="lightbox" id="lightbox" hidden>
+    <figure>
+      <img id="lightboxImg" src="" alt="" />
+      <figcaption id="lightboxCaption"></figcaption>
+    </figure>
+    <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Lukk">✕</button>
+  </div>
+
+  <!-- ==================================================================
+       SVG-tegninger (gjenbrukes via <use>). Alt er tegnet for hånd,
+       med utgangspunkt i stillbilder fra videoen.
+       ================================================================== -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+
+    <!-- =========== Snoopy: sittende, stripet hatt, kake ved siden (tegnet etter referansebilde) =========== -->
+    <g id="snoopy-party" stroke="#4a3a34" stroke-width="4.5" stroke-linejoin="round" stroke-linecap="round">
+      <ellipse cx="116" cy="236" rx="92" ry="10" fill="#000" opacity="0.05" stroke="none"/>
+
+      <!-- hale -->
+      <path d="M66 182 C 50 184 39 178 35 166 C 43 167 52 167 62 163" fill="#fff"/>
+
+      <!-- kropp (sittende, vendt mot høyre) -->
+      <path d="M64 176 C 52 152 60 118 88 108 C 112 99 136 108 144 132 C 150 150 147 168 143 184
+               C 138 204 140 220 118 224 C 98 227 74 224 64 210 C 55 198 54 190 64 176 Z" fill="#fff"/>
+
+      <!-- bakfot -->
+      <path d="M86 214 C 100 224 128 224 144 214 C 136 202 112 200 100 206 C 92 210 86 210 86 214 Z" fill="#fff"/>
+
+      <!-- forlabber -->
+      <path d="M100 206 C 98 216 104 222 114 222 C 122 222 126 214 124 205 C 116 201 106 201 100 206 Z" fill="#fff"/>
+      <path d="M138 188 C 152 190 166 196 170 206 C 160 211 144 209 135 202 C 130 198 132 188 138 188 Z" fill="#fff"/>
+
+      <!-- hode + snute som én kontur (klassisk Snoopy-fasong) -->
+      <path d="M72 96
+               C 66 74 74 52 96 46
+               C 116 41 136 50 142 70
+               C 150 66 176 64 196 76
+               C 212 86 218 100 210 110
+               C 204 117 194 118 187 115
+               C 183 124 170 130 156 127
+               C 150 136 138 140 126 138
+               C 100 143 76 128 72 104
+               C 71 101 71 99 72 96 Z" fill="#fff"/>
+      <ellipse cx="204" cy="100" rx="9.5" ry="8" fill="#4a3a34" stroke="none" transform="rotate(8 204 100)"/>
+      <path d="M158 122 C 158 132 150 138 140 135" fill="none" stroke-width="3.4"/>
+      <circle cx="120" cy="82" r="4.8" fill="#4a3a34" stroke="none"/>
+      <path d="M111 71 C 117 66 126 67 131 72" fill="none" stroke-width="2.8"/>
+
+      <!-- øre (svart, henger ned til venstre) -->
+      <path d="M84 64 C 58 60 42 80 42 110 C 41 136 56 156 79 154 C 94 153 98 134 96 114
+               C 94 96 96 84 96 76 C 96 66 96 66 84 64 Z" fill="#4a3a34"/>
+
+      <!-- hatt: blå/hvit/rosa-stripet kjegle -->
+      <g transform="rotate(-15 100 46)">
+        <path d="M100 -10 L 106.5 8 L 93.5 8 Z" fill="#fff" stroke="none"/>
+        <path d="M93.5 8 L 106.5 8 L 113.8 28 L 86.2 28 Z" fill="#8fc3e6" stroke="none"/>
+        <path d="M86.2 28 L 113.8 28 L 120.4 46 L 79.6 46 Z" fill="#f4b6c6" stroke="none"/>
+        <path d="M79.6 46 L 120.4 46 L 124 56 C 108 62 92 62 76 56 Z" fill="#8fc3e6" stroke="none"/>
+        <path d="M100 -10 L 124 56 C 106 63 94 63 76 56 Z" fill="none"/>
+        <circle cx="100" cy="-10" r="5" fill="#fff"/>
+      </g>
+
+      <!-- kake på bakken -->
+      <g transform="translate(158 148)">
+        <path d="M4 24 C 4 18 14 15 33 15 C 52 15 62 18 62 24 L 62 52 C 62 58 50 62 33 62 C 16 62 4 58 4 52 Z" fill="#f7da8c"/>
+        <path d="M2 22 C 2 14 15 10 33 10 C 51 10 64 14 64 22 C 64 28 58 30 55 25 C 53 31 46 31 43 26
+                 C 41 32 33 32 31 26 C 29 32 21 32 19 26 C 17 31 11 31 9 25 C 7 29 2 28 2 22 Z" fill="#fff"/>
+        <path d="M33 12 L 33 -10" stroke-width="4"/>
+        <path d="M33 -10 C 27 -16 27 -26 33 -32 C 39 -26 39 -16 33 -10 Z" fill="#f6a545"/>
+        <path d="M33 -17 C 30 -20 30 -25 33 -28 C 36 -25 36 -20 33 -17 Z" fill="#ffe1a6" stroke="none"/>
+        <g stroke="none"><circle cx="20" cy="42" r="2.6" fill="#8fc7e8"/><circle cx="41" cy="46" r="2.6" fill="#e79aa6"/><circle cx="31" cy="40" r="2.6" fill="#a9d3a0"/></g>
+      </g>
+    </g>
+
+    <!-- =========== Snoopy som kikker over kanten =========== -->
+    <g id="snoopy-peek" stroke="#4a3a34" stroke-width="4.5" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M84 52 C 56 46 40 65 40 97 C 40 121 54 139 76 137 C 90 135 94 117 92 99
+               C 90 83 92 71 92 63 C 92 52 94 54 84 52 Z" fill="#4a3a34"/>
+      <path d="M196 48 C 220 42 234 60 234 88 C 234 108 220 124 202 120 C 190 117 192 98 192 84
+               C 192 66 186 52 196 48 Z" fill="#4a3a34"/>
+      <path d="M60 92 C 56 44 92 20 132 20 C 172 20 208 44 204 92 C 202 116 168 130 132 130
+               C 96 130 64 116 60 92 Z" fill="#fff"/>
+      <path d="M146 74 C 182 68 214 80 216 104 C 218 124 190 134 166 128 C 148 124 136 104 136 90
+               C 136 80 138 76 146 74 Z" fill="#fff"/>
+      <ellipse cx="202" cy="106" rx="10" ry="8" fill="#4a3a34" stroke="none" transform="rotate(12 202 106)"/>
+      <circle cx="116" cy="76" r="4.8" fill="#4a3a34" stroke="none"/>
+      <circle cx="139" cy="76" r="4.8" fill="#4a3a34" stroke="none"/>
+      <path d="M106 62 C 112 56 121 57 125 63 M132 63 C 138 57 147 58 150 64" fill="none" stroke-width="2.8"/>
+      <path d="M118 116 C 108 116 101 126 101 138 C 101 149 109 153 121 153 C 135 153 142 145 142 132 C 142 122 132 116 118 116 Z" fill="#fff"/>
+      <path d="M150 118 C 140 118 133 128 133 140 C 133 151 141 155 153 155 C 167 155 174 147 174 134 C 174 124 164 118 150 118 Z" fill="#fff"/>
+      <path d="M112 129 v13 M121 131 v13 M147 131 v13 M157 131 v13" fill="none" stroke-width="2.6"/>
+    </g>
+
+    <!-- =========== Bursdagskake (skjerm 3) =========== -->
+    <g id="cake" stroke="#4a3a34" stroke-width="4.5" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M14 60 C 14 52 28 48 60 48 C 92 48 106 52 106 60 L 106 100 C 106 108 90 112 60 112
+               C 30 112 14 108 14 100 Z" fill="#f7da8c"/>
+      <path d="M11 56 C 11 46 30 40 60 40 C 90 40 109 46 109 56 C 109 64 100 66 96 59 C 93 67 82 67 79 59
+               C 76 67 65 67 62 59 C 59 67 48 67 45 59 C 42 66 32 66 29 59 C 26 64 11 64 11 56 Z" fill="#fff"/>
+      <path d="M60 40 L 60 8" stroke-width="4.5"/>
+      <path d="M60 8 C 52 0 52 -14 60 -22 C 68 -14 68 0 60 8 Z" fill="#f6a545"/>
+      <path d="M60 -2 C 56 -6 56 -12 60 -16 C 64 -12 64 -6 60 -2 Z" fill="#ffe1a6" stroke="none"/>
+      <g stroke-width="3"><path d="M34 -14 l -10 -8 M86 -14 l 10 -8 M60 -34 v -10 M44 -26 l -6 -9 M76 -26 l 6 -9"/></g>
+      <g stroke="none"><circle cx="40" cy="88" r="3.2" fill="#8fc7e8"/><circle cx="66" cy="96" r="3.2" fill="#e79aa6"/><circle cx="82" cy="86" r="3.2" fill="#a9d3a0"/></g>
+    </g>
+
+    <!-- =========== Pappeske (skjerm 4) =========== -->
+    <g id="gift-box" stroke="#4a3a34" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+      <ellipse cx="110" cy="188" rx="88" ry="12" fill="#000" opacity="0.06" stroke="none"/>
+      <path d="M22 78 L 110 96 L 110 184 L 22 166 Z" fill="#dcab72"/>
+      <path d="M110 96 L 198 78 L 198 166 L 110 184 Z" fill="#c59452"/>
+      <path d="M22 78 L 92 58 L 198 78 L 110 96 Z" fill="#e8bf88"/>
+      <path d="M92 58 L 110 96 L 110 184" fill="none" stroke="#f0e2c8" stroke-width="10"/>
+      <path d="M92 58 L 110 96 L 110 184" fill="none" stroke="#4a3a34" stroke-width="1.3" opacity="0.28"/>
+      <path d="M138 116 l 24 6 l -5 26 l -24 -6 Z" fill="#fff" stroke-width="3"/>
+      <path d="M138 116 l -12 -12" fill="none" stroke-width="2.5"/>
+      <path d="M143 129 l 14 4 M141 139 l 14 4" fill="none" stroke="#c98a9a" stroke-width="2.4"/>
+      <path d="M110 40 C 107 33 97 33.5 97 41 C 97 48 104 53 110 59 C 116 53 123 48 123 41 C 123 33.5 113 33 110 40 Z" fill="#e79aa6" stroke-width="3"/>
+      <g stroke="#f4c95d" stroke-width="2.6"><path d="M44 54 v-9 M39.5 49.5 h9" fill="none"/><path d="M182 48 v-8 M177.5 44 h9" fill="none"/></g>
+    </g>
+
+    <!-- =========== Lite hjerte (skjerm 5) =========== -->
+    <g id="deco-heart" stroke="#4a3a34" stroke-width="4.5" stroke-linejoin="round">
+      <path d="M45 26 C 36 6 6 8 6 34 C 6 56 32 74 45 86 C 58 74 84 56 84 34 C 84 8 54 6 45 26 Z" fill="#f4b6c6"/>
+    </g>
+
+  </defs></svg>
+
+  <script src="script.js?v=1"></script>
+</body>
+</html>
